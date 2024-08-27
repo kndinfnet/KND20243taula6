@@ -1,0 +1,65 @@
+nav {
+  width: 250px;
+  background-color: #333;
+  color: #fff;
+  transition: width 0.3s ease;
+  overflow-x: hidden;
+  white-space: nowrap;
+  flex-shrink: 0;
+  position: relative;
+}
+
+nav.collapsed {
+  width: 60px;
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+nav ul li {
+  padding: 15px;
+  border-bottom: 1px solid #444;
+}
+
+nav ul li a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+
+nav.collapsed ul li a::before {
+  content: attr(data-icon);
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+nav.collapsed ul li a {
+  text-align: center;
+}
+
+.toggle-button {
+  position: absolute;
+  top: 0px;
+  left: 100%;
+  margin-left:-10px;
+  transform: translateX(-50%);
+  background-color: #333;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  z-index: 999;
+}
+
+nav.collapsed .toggle-button {
+  transform: translateX(-50%) rotate(180deg);
+}
