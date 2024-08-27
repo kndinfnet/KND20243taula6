@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Navigation.css";
+import styles from "./Navigation.module.css";
 
 const Navigation = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -10,8 +10,8 @@ const Navigation = () => {
   };
 
   return (
-    <nav className={isCollapsed ? "collapsed" : ""}>
-      <button className="toggle-button" onClick={toggleMenu}>
+    <nav className={isCollapsed ? styles.collapsed : ""}>
+      <button className={styles.toggleButton} onClick={toggleMenu}>
         >
       </button>
       <ul>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "./Modal.module.css";
 
 const Evento = ({ evento, onClick }) => {
   return (
@@ -16,11 +17,12 @@ const Exercise10 = () => {
   const [selectedEvento, setSelectedEvento] = useState(null);
   const [categorias, setCategorias] = useState([]);
 
-
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("https://api.npoint.io/1758fed3b92ac6e45e43");
+        const response = await fetch(
+          "https://api.npoint.io/1758fed3b92ac6e45e43"
+        );
         if (!response.ok) {
           throw new Error("Network failed");
         }
@@ -28,10 +30,10 @@ const Exercise10 = () => {
         setEventos(responseData.eventos);
 
         // Extrair categorias únicas dos eventos
-        const uniqueCategorias = Array.from(new Set(eventos.map(evento => evento.categoria)));
+        const uniqueCategorias = Array.from(
+          new Set(eventos.map((evento) => evento.categoria))
+        );
         setCategorias(uniqueCategorias);
-
-        
       } catch (error) {
         console.error(error);
       }
@@ -48,14 +50,18 @@ const Exercise10 = () => {
   };
 
   const handleClick = (evento) => {
-      selectedEvento ? setSelectedEvento(null) : setSelectedEvento(evento);
+    selectedEvento ? setSelectedEvento(null) : setSelectedEvento(evento);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedEvento(null);
   };
 
   const filteredEventos = eventos.filter((evento) => {
-    const searchMatch = 
-      evento.nome.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    const searchMatch =
+      evento.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
       evento.local.toLowerCase().includes(searchTerm.toLowerCase());
-    const categoryMatch = 
+    const categoryMatch =
       selectedCategoria === "" || evento.categoria === selectedCategoria;
 
     return searchMatch && categoryMatch;
@@ -66,33 +72,39 @@ const Exercise10 = () => {
       <h1 className="title">Laboratório de Promisses: Eventos</h1>
 
       <div>
-        <input 
-          type="text" 
-          placeholder="Buscar por nome ou local" 
+        <input
+          type="text"
+          placeholder="Buscar por nome ou local"
           value={searchTerm}
-          onChange={handleSearchChange} 
+          onChange={handleSearchChange}
         />
         <select value={selectedCategoria} onChange={handleCategoryChange}>
           <option value="">Todas as Categorias</option>
           {categorias.map((categoria, index) => (
-            <option key={index} value={categoria}>{categoria}</option>
+            <option key={index} value={categoria}>
+              {categoria}
+            </option>
           ))}
         </select>
       </div>
 
       {selectedEvento && (
-        <div className="modal">
-          <h2>{selectedEvento.nome}</h2>
-          <p>{selectedEvento.local}</p>
-          <img src={selectedEvento.imagem} alt={selectedEvento.nome} />
+        <div className={styles.modalOverlay} onClick={handleCloseModal}>
+          <div className={styles.modal}>
+            <h2>{selectedEvento.nome}</h2>
+            <p>{selectedEvento.local}</p>
+            <img src={selectedEvento.imagem} alt={selectedEvento.nome} />
+          </div>
         </div>
       )}
-      
+
       {filteredEventos.map((evento, index) => (
-        <Evento key={index} evento={evento} onClick={() => handleClick(evento)} />
+        <Evento
+          key={index}
+          evento={evento}
+          onClick={() => handleClick(evento)}
+        />
       ))}
-
-
     </>
   );
 };

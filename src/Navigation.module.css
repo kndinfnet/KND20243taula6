@@ -45,11 +45,11 @@ nav.collapsed ul li a {
   text-align: center;
 }
 
-.toggle-button {
+.toggleButton {
   position: absolute;
   top: 0px;
   left: 100%;
-  margin-left:-10px;
+  margin-left: -10px;
   transform: translateX(-50%);
   background-color: #333;
   border: none;
@@ -60,6 +60,6 @@ nav.collapsed ul li a {
   z-index: 999;
 }
 
-nav.collapsed .toggle-button {
+nav.collapsed .toggleButton {
   transform: translateX(-50%) rotate(180deg);
 }
