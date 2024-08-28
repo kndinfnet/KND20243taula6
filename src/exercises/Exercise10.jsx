@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "./Modal.module.css";
 
 const Evento = ({ evento, onClick }) => {
   return (
@@ -88,8 +89,8 @@ const Exercise10 = () => {
       </div>
 
       {selectedEvento && (
-        <div className="modal-overlay" onClick={handleCloseModal}>
-          <div className="modal">
+        <div className={styles.modalOverlay} onClick={handleCloseModal}>
+          <div className={styles.modal}>
             <h2>{selectedEvento.nome}</h2>
             <p>{selectedEvento.local}</p>
             <img src={selectedEvento.imagem} alt={selectedEvento.nome} />
